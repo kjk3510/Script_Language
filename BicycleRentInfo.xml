@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><GeoInfoBikeConvenientFacilities>
+<list_total_count>1</list_total_count>
+<RESULT>
+<CODE>INFO-000</CODE>
+<MESSAGE>정상 처리되었습니다</MESSAGE>
+</RESULT>
+<row>
+<OBJECTID>6</OBJECTID>
+<FILENAME>http://bike.seoul.go.kr/data/data/1_1/a0008a.jpg</FILENAME>
+<CLASS>시내_대여소</CLASS>
+<ADDRESS>서울특별시 서초구 방배동 3250</ADDRESS>
+<X>198458.59</X>
+<Y>442843.013</Y>
+</row>
+</GeoInfoBikeConvenientFacilities>
