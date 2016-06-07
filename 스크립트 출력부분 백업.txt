@@ -1,0 +1,17 @@
+from ParseToXml import Data
+
+
+def main():
+    data = Data()
+
+    while(1):
+        data.num = (input("고유번호입력 : "))
+
+        data.parse()
+        data.printInfo()
+        print('\n\n')
+
+
+if __name__ == "__main__":
+    main()
+

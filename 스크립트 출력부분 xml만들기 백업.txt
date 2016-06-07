@@ -1,0 +1,17 @@
+from ParseToXml import Data
+
+
+def main():
+    data = Data()
+
+    while(1):
+        data.LOCATION = (input("위치입력 : "))
+
+        data.parse()
+        data.printInfo()
+        print('\n\n')
+
+
+if __name__ == "__main__":
+    main()
+

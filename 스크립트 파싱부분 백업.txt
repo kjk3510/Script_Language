@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+
+
+import urllib.request
+from urllib.parse  import quote
+import xml.etree.ElementTree as etree
+
+
+
+class Data:
+
+    def __init__(self):
+        self.key = '4649626c536b6a6b3130317146447052'
+        self.num = None
+        self.filename = None
+        self.url = None
+        self.tree = None
+        self.root = None
+
+    def parse(self):
+        self.url = "http://openapi.seoul.go.kr:8088/%s/xml/BicyclePumpInfo/2/%s" % (self.key, self.num)
+        data = urllib.request.urlopen(self.url).read()
+        self.filename = "BicyclePumpInfo" + ".xml"
+        f = open(self.filename, "wb")
+        f.write(data)
+        f.close()
+        self.tree = etree.parse(self.filename)
+        self.root = self.tree.getroot()
+            
+    def printInfo(self):
+        for BicyclePump in self.root.iter("BicyclePumpInfo"):
+            for BicyclePumpInfo in self.root.iter("row"):
+                print('--------------------------------------------------------------')
+                print('설치지점명\t\t:' + BicyclePumpInfo.findtext('SET_LOC'))
+                print('설치장소\t\t:' + BicyclePumpInfo.findtext('SET_PLACE'))
+                print('위치\t\t\t:' + BicyclePumpInfo.findtext('LOCATION'))
+                print('개소\t\t\t:' + BicyclePumpInfo.findtext('SPOT'))
+                print('대수(대)\t\t:' + BicyclePumpInfo.findtext('EA_COUNT'))
+                print('주입방식\t\t:' + BicyclePumpInfo.findtext('PUMP_TYPE'))
+                print('결제정보\t\t:' + BicyclePumpInfo.findtext('PAYMENT'))
+                print('운영방식\t\t:' + BicyclePumpInfo.findtext('OPERATE_TYPE'))
+                print('--------------------------------------------------------------')
+            
+
+
+
