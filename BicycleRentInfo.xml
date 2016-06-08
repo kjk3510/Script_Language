@@ -5,11 +5,11 @@
 <MESSAGE>정상 처리되었습니다</MESSAGE>
 </RESULT>
 <row>
-<OBJECTID>6</OBJECTID>
-<FILENAME>http://bike.seoul.go.kr/data/data/1_1/a0008a.jpg</FILENAME>
+<OBJECTID>5</OBJECTID>
+<FILENAME>http://bike.seoul.go.kr/data/data/1_1/a0021a.jpg</FILENAME>
 <CLASS>시내_대여소</CLASS>
-<ADDRESS>서울특별시 서초구 방배동 3250</ADDRESS>
-<X>198458.59</X>
-<Y>442843.013</Y>
+<ADDRESS>서울특별시 송파구 풍납동 310</ADDRESS>
+<X>209794.882</X>
+<Y>448006.378</Y>
 </row>
 </GeoInfoBikeConvenientFacilities>
