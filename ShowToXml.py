@@ -1,31 +1,34 @@
-#from ParseToXml import Data
+from ParseToXml import Data
 
 
-#def main():
-    #data = Data()
+def main():
+    data = Data()
 
-    #while(1):
-        #data.LOCATION = (input("위치입력 : "))
+    while(1):
+        menu = 0
+        data.pumpnum = 0
+        data.rentnum = 0
 
-#        data.parse()
-#        data.printInfo()
-#        print('\n\n')
+        print("원하는 정보를 고르세요")
+        print("1. 공공 공기주입기 위치")
+        print("2. 공공 자전거편의시설 위치")
 
-import requests as rq
-import json
+        while(menu < 1 or menu > 2):
+            menu = int(input("번호입력 : "))
+            print('\n\n')
+        if menu == data.BICYPUMP:
+            data.pumpnum = int(input("고유번호 입력 : "))
 
-def getAddressFromNaver(name):
-    url = "http://map.naver.com/search2/local.nhn"
-    header = {'User-Agent' : 'Mozilla/5.0'}
-    payload = {'query' : name}
 
-    req = rq.Request('Get', url, header=header, params=payload)
-    r = req.prepare()
-    s = rq.Session()
-    result = s.send(r).json()
-    return result['result']['site']['list'][0]['tel']
+        elif menu == data.BICYRENT:
+            data.rentnum = int(input("고유번호 입력 : "))
+
+
+        data.parse(menu)
+        data.printInfo(menu)
+        print("\n")
 
 
 if __name__ == "__main__":
-    print(getAddressFromNaver("롯데마트서울역점"))
+    main()
 
