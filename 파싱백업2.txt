@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+
+
+import urllib.request
+from urllib.parse  import quote
+import xml.etree.ElementTree as etree
+import requests as rq
+import json
+
+
+
+class Data:
+    MENUSELECT = 0
+    BICYCLE = 1
+    BICYRENT = 2
+
+    def __init__(self):
+        self.bicyclekey = 'IES82Mgbt/p5qEyuYtnNXiWQ12l6kLdfZT52v383QvU='
+        self.rentkey = '5351664f416b6a6b35396967654e70'
+        self.bicycledong = None
+        self.rentnum = 0
+        self.filename = None
+        self.bicycleurl = None
+        self.tree = None
+        self.root = None
+
+    def parse(self, menu):
+        self.choose_num = menu
+        if self.choose_num == self.BICYCLE:
+            self.bicycleurl = "http://data.sejong.go.kr/sejong/openapi/service/getDataList.api?serviceId=vstationlist&serviceKey=%s" % (self.bicyclekey)
+            data = urllib.request.urlopen(self.bicycleurl).read()
+            self.filename = "BicycleInfo" + ".xml"
+        elif self.choose_num == self.BICYRENT:
+            self.renturl = "http://openAPI.seoul.go.kr:8088/%s/xml/GeoInfoBikeConvenientFacilities/1/5/%s" % (self.rentkey, self.rentnum)
+            data = urllib.request.urlopen(self.renturl).read()
+            self.filename = "BicycleRentInfo" + ".xml"
+        f = open(self.filename, "wb")
+        f.write(data)
+        f.close()
+        self.tree = etree.parse(self.filename)
+        self.root = self.tree.getroot()
+            
+    def printInfo(self, menu):
+        self.choose_num = menu
+        if self.choose_num == self.BICYCLE:
+            for Bicycle in self.root.iter("response"):
+                for response in self.root.iter("item"):
+                    print('--------------------------------------------------------------')
+                    print('대여소번호\t\t\t:' + response.findtext('stationNo'))
+                    print('대여소주소\t\t\t:' + response.findtext('stationNm'))
+                    print('전체자전거수\t\t:' + response.findtext('totcnt'))
+                    print('대여가능자전거수\t:' + response.findtext('lockon'))
+                    print('설치주소(구)\t\t:' + response.findtext('gu'))
+                    print('설치주소(동)\t\t:' + response.findtext('dong'))
+                    print('--------------------------------------------------------------')
+        elif self.choose_num == self.BICYRENT:
+            for BicycleRent in self.root.iter("GeoInfoBikeConvenientFacilities"):
+                for GeoInfoBikeConvenientFacilities in self.root.iter("row"):
+                    print('--------------------------------------------------------------')
+                    print('편의시설종류\t:' + GeoInfoBikeConvenientFacilities.findtext('CLASS'))
+                    print('위치\t\t\t:' + GeoInfoBikeConvenientFacilities.findtext('ADDRESS'))
+                    print('--------------------------------------------------------------')

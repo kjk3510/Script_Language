@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
+from urllib.parse import quote
 
-from urllib.request import Request, urlopen
-from urllib.request import quote,
+p = ('남양주시')
+quote(p)
+print(p)
 
-url = 'http://openapi.sejong.go.kr/openapi-data/service/PublicBikeData/getPublicBikeStationCount'
-queryParams = '?' + urlencode({ quote_plus('ServiceKey') : 'PTAX4yzA4NS2ah0wIAKmx5KV%2Fn9NY47bPPOLr%2FZL4qYR2svXwwutj%2B8BrWO%2F6x2KwzeXZ73L9tzUmGwYCqh3Xg%3D%3D', quote_plus('numOfRows') : '999', quote_plus('pageNo') : '1' })
+code = input("당신이 URL 인코딩할 구문을 삽입하시오...\n: ")
 
-request = Request(url + queryParams)
-request.get_method = lambda: 'GET'
-response_body = urlopen(request).read()
-print response_body
+for encode in code:
+    hexnum = hex(ord(encode))
+    new_hexnum = str(hexnum)
+    new_hexnum = new_hexnum[2] + new_hexnum[3]
+    print("%", end="")
+    print(new_hexnum, end="")
