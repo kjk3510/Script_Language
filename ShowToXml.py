@@ -18,6 +18,8 @@ def main():
 
         data.parse(Name)
         data.printInfo(Name)
+        data.save(Name)
+        data.sendemail()
         print("\n")
 
 

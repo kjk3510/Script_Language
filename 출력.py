@@ -1,16 +1,69 @@
 # -*- coding: utf-8 -*-
 
-from urllib.parse import quote
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
 
-p = ('남양주시')
-quote(p)
-print(p)
+host='smtp.gmail.com' #Gmail smtp server address
 
-code = input("당신이 URL 인코딩할 구문을 삽입하시오...\n: ")
+port='587' #smtp port
 
-for encode in code:
-    hexnum = hex(ord(encode))
-    new_hexnum = str(hexnum)
-    new_hexnum = new_hexnum[2] + new_hexnum[3]
-    print("%", end="")
-    print(new_hexnum, end="")
+imagefile='logo.png'
+
+
+
+sender='kjk3510@gmail.com' #sender email address
+
+recipient='kjk3510@naver.com' #recipient email address
+
+
+
+# Create MIMEBase
+
+msg=MIMEBase('multipart','mixed')
+
+msg['Subject']='Test Email in html.logo'
+
+msg['From']=sender
+
+msg['To']=recipient
+
+
+
+
+# Create MIMEImage
+
+imageF=open(imagefile,'rb')
+
+imagePart=MIMEImage(imageF.read())
+
+imageF.close()
+
+
+
+# attach html,image
+
+msg.attach(imagePart)
+
+
+
+# mail send
+
+s=smtplib.SMTP(host,port)
+
+s.set_debuglevel(1) #debuging
+
+s.ehlo()
+
+s.starttls()
+
+s.ehlo()
+
+s.login(sender,'dowkqh1313!')
+
+s.sendmail(sender,[recipient],msg.as_string())
+
+s.close()
+
+
