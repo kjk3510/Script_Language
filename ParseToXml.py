@@ -4,33 +4,34 @@
 import urllib.request
 from urllib.parse  import quote
 import xml.etree.ElementTree as etree
+import requests as rq
+import json
 
 
 
 class Data:
     MENUSELECT = 0
-    BICYPUMP = 1
+    BICYCLE = 1
     BICYRENT = 2
 
     def __init__(self):
-        self.pumpkey = '4649626c536b6a6b3130317146447052'
+        self.bicyclekey = 'IES82Mgbt/p5qEyuYtnNXiWQ12l6kLdfZT52v383QvU='
         self.rentkey = '5351664f416b6a6b35396967654e70'
-        self.pumpnum = 0
+        self.bicycledong = None
         self.rentnum = 0
         self.filename = None
-        self.pumpurl = None
-        self.rentrul = None
+        self.bicycleurl = None
         self.tree = None
         self.root = None
 
     def parse(self, menu):
         self.choose_num = menu
-        if self.choose_num == self.BICYPUMP:
-            self.pumpurl = "http://openapi.seoul.go.kr:8088/%s/xml/BicyclePumpInfo/1/%d" % (self.pumpkey, self.pumpnum)
-            data = urllib.request.urlopen(self.pumpurl).read()
-            self.filename = "BicyclePumpInfo" + ".xml"
+        if self.choose_num == self.BICYCLE:
+            self.bicycleurl = "http://data.sejong.go.kr/sejong/openapi/service/getDataList.api?serviceId=vstationlist&serviceKey=%s" % (self.bicyclekey)
+            data = urllib.request.urlopen(self.bicycleurl).read()
+            self.filename = "BicycleInfo" + ".xml"
         elif self.choose_num == self.BICYRENT:
-            self.renturl = "http://openAPI.seoul.go.kr:8088/%s/xml/GeoInfoBikeConvenientFacilities/1/5/%d" % (self.rentkey, self.rentnum)
+            self.renturl = "http://openAPI.seoul.go.kr:8088/%s/xml/GeoInfoBikeConvenientFacilities/1/5/%s" % (self.rentkey, self.rentnum)
             data = urllib.request.urlopen(self.renturl).read()
             self.filename = "BicycleRentInfo" + ".xml"
         f = open(self.filename, "wb")
@@ -41,18 +42,16 @@ class Data:
             
     def printInfo(self, menu):
         self.choose_num = menu
-        if self.choose_num == self.BICYPUMP:
-            for BicyclePump in self.root.iter("BicyclePumpInfo"):
-                for BicyclePumpInfo in self.root.iter("row"):
+        if self.choose_num == self.BICYCLE:
+            for Bicycle in self.root.iter("response"):
+                for response in self.root.iter("item"):
                     print('--------------------------------------------------------------')
-                    print('설치지점명\t\t:' + BicyclePumpInfo.findtext('SET_LOC'))
-                    print('설치장소\t\t:' + BicyclePumpInfo.findtext('SET_PLACE'))
-                    print('위치\t\t\t:' + BicyclePumpInfo.findtext('LOCATION'))
-                    print('개소\t\t\t:' + BicyclePumpInfo.findtext('SPOT'))
-                    print('대수(대)\t\t:' + BicyclePumpInfo.findtext('EA_COUNT'))
-                    print('주입방식\t\t:' + BicyclePumpInfo.findtext('PUMP_TYPE'))
-                    print('결제정보\t\t:' + BicyclePumpInfo.findtext('PAYMENT'))
-                    print('운영방식\t\t:' + BicyclePumpInfo.findtext('OPERATE_TYPE'))
+                    print('대여소번호\t\t\t:' + response.findtext('stationNo'))
+                    print('대여소주소\t\t\t:' + response.findtext('stationNm'))
+                    print('전체자전거수\t\t:' + response.findtext('totcnt'))
+                    print('대여가능자전거수\t:' + response.findtext('lockon'))
+                    print('설치주소(구)\t\t:' + response.findtext('gu'))
+                    print('설치주소(동)\t\t:' + response.findtext('dong'))
                     print('--------------------------------------------------------------')
         elif self.choose_num == self.BICYRENT:
             for BicycleRent in self.root.iter("GeoInfoBikeConvenientFacilities"):
@@ -60,6 +59,4 @@ class Data:
                     print('--------------------------------------------------------------')
                     print('편의시설종류\t:' + GeoInfoBikeConvenientFacilities.findtext('CLASS'))
                     print('위치\t\t\t:' + GeoInfoBikeConvenientFacilities.findtext('ADDRESS'))
-                    print('x좌표\t\t\t:' + GeoInfoBikeConvenientFacilities.findtext('X'))
-                    print('y좌표\t\t\t:' + GeoInfoBikeConvenientFacilities.findtext('Y'))
                     print('--------------------------------------------------------------')

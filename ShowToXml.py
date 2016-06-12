@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from ParseToXml import Data
 
 
@@ -6,7 +9,7 @@ def main():
 
     while(1):
         menu = 0
-        data.pumpnum = 0
+        data.bicycledong = None
         data.rentnum = 0
 
         print("원하는 정보를 고르세요")
@@ -16,13 +19,13 @@ def main():
         while(menu < 1 or menu > 2):
             menu = int(input("번호입력 : "))
             print('\n\n')
-        if menu == data.BICYPUMP:
-            data.pumpnum = int(input("고유번호 입력 : "))
+        if menu == data.BICYCLE:
+            data.bicycledong = str(input("동 입력 : "))
+
 
 
         elif menu == data.BICYRENT:
-            data.rentnum = int(input("고유번호 입력 : "))
-
+            data.rentnum = (input("동 입력 : "))
 
         data.parse(menu)
         data.printInfo(menu)
