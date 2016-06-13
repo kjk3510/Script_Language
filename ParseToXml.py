@@ -24,6 +24,7 @@ class Data:
 
     PLUSDATA = 4
     PDTOSAVE = 1
+    PDTOINFO = 1
     PDTOEM = 2
 
     Test_Name = None
@@ -71,7 +72,7 @@ class Data:
             for row in Parmacy.iter("row"):
                 self.savename = "save.txt"
                 fts = open(self.savename, "a")
-                fts.write("---------------------------------------------------------\n")
+                fts.write("--------------------------------------------------------------\n")
                 fts.write('시군명\t\t\t:' + row.findtext('SIGUN_NM'))
                 fts.write('\n')
                 fts.write('약국이름\t\t:' + row.findtext('BIZPLC_NM'))
@@ -84,7 +85,7 @@ class Data:
                 fts.write('\n')
                 fts.write('인허가구분명\t\t:' + row.findtext('LICENSG_DIV_NM'))
                 fts.write('\n')
-                fts.write("---------------------------------------------------------\n")
+                fts.write("--------------------------------------------------------------\n")
                 fts.write('\n')
             for head in Parmacy.iter("head"):
                 fts.write('검색개수 : ' + head.findtext('list_total_count'))
@@ -92,13 +93,66 @@ class Data:
         print("데이터가 저장되었습니다.")
 
 
-    def plusdata(self):
-        print("데이터 추가하기"'\n')
-        pf = open("pharmacy.xml", "a")
+    def plusdata(self, Name, SIGUN, BIZPLC, LOCPLC, LOCPLCROAD, BSN, LICENSG):
+        for Parmacy in self.root.iter("Parmacy"):
+            for row in Parmacy.iter("row"):
+                self.savename = "save2.txt"
+                fts = open(self.savename, "a")
+                fts.write("--------------------------------------------------------------\n")
+                fts.write('시군명\t\t\t:' + row.findtext('SIGUN_NM'))
+                fts.write('\n')
+                fts.write('약국이름\t\t:' + row.findtext('BIZPLC_NM'))
+                fts.write('\n')
+                fts.write('지번주소\t\t:' + row.findtext('LOCPLC_LOTNO_ADDR'))
+                fts.write('\n')
+                fts.write('도로명주소\t\t:' + row.findtext('LOCPLC_ROADNM_ADDR'))
+                fts.write('\n')
+                fts.write('운영현황\t\t:' + row.findtext('BSN_STATE_NM'))
+                fts.write('\n')
+                fts.write('인허가구분명\t\t:' + row.findtext('LICENSG_DIV_NM'))
+                fts.write('\n')
+                fts.write("--------------------------------------------------------------\n")
+                fts.write('\n')
+                fts.close()
+        fts = open(self.savename, "a")
+        fts.write("--------------------------------------------------------------\n")
+        fts.write('시군명\t\t\t:' + SIGUN)
+        fts.write('\n')
+        fts.write('약국이름\t\t:' + BIZPLC)
+        fts.write('\n')
+        fts.write('지번주소\t\t:' + LOCPLC)
+        fts.write('\n')
+        fts.write('도로명주소\t\t:' + LOCPLCROAD)
+        fts.write('\n')
+        fts.write('운영현황\t\t:' + BSN)
+        fts.write('\n')
+        fts.write('인허가구분명\t\t:' + LICENSG)
+        fts.write('\n')
+        fts.write("--------------------------------------------------------------\n")
+        fts.write('\n')
+        fts.close()
+
+
+    def plusdataInfo(self, Name, SIGUN, BIZPLC, LOCPLC, LOCPLCROAD, BSN, LICENSG):
+        fp = open("save2.txt", "r")
+#        while True:
+#            line = fp.readline()
+#            if not line: break
+#            print(line)
+        rfp = fp.read() # 위에 코드로하면 한칸씩 띄어서 읽혀진다.
+        print(rfp)
+        fp.close()
 
 
     def delete(self):
         files = glob.glob("*")
         for f in files:
             if f == 'save.txt':
+                os.remove(f)
+
+
+    def deletep(self):
+        files = glob.glob("*")
+        for f in files:
+            if f == 'save2.txt':
                 os.remove(f)

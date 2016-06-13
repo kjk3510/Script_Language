@@ -49,4 +49,5 @@ EMAIL = 3
     
 PLUSDATA = 4
     PDTOSAVE = 1
-    PDTOEM = 2
+    PDTOINFO = 2
+    PDTOEM = 3

@@ -3,7 +3,6 @@
 
 from ParseToXml import Data # 파싱데이터를 받아오기위함
 from sendtomail import send_mail # 이메일보내기 위함
-from plus_data_example import plusplus # 파싱데이터에 추가입력 하기위함
 
 
 def main():
@@ -15,14 +14,22 @@ def main():
         sv_menu = 0
         em_menu = 0
         pl_menu = 0
+        pls_menu = 0
         data.sigunNm = None
         Name = None
+        SIGUN = None
+        BIZPLC = None
+        LOCPLC = None
+        LOCPLCROAD = None
+        BSN = None
+        LICENSG = None
 
         print("원하시는 작업을 고르세요."'\n')
         print("1. 출력하기"'\n')
         print("2. 저장하기"'\n')
         print("3. 메일보내기"'\n')
         print("4. 정보추가하기"'\n')
+        print("5. 지도띄우기"'\n')
 
         while(menu < 1 or menu > 4):
             menu = int(input("번호를 입력하세요 : "))
@@ -81,10 +88,30 @@ def main():
             data.sigunNm = str(input("시군명을 입력하세요 : "))
             Name = data.sigunNm
             data.parse(Name)
-            pl_menu = int(input("번호 입력 : "))
+            print('\n')
+            print("추가데이터를 입력하려면 1을 입력하세요"'\n')
+            pl_menu = int(input("번호를 입력하세요 : "))
             if pl_menu == data.PDTOSAVE:
-                plusplus()
-                data.printInfo(Name)
+                SIGUN = str(input("추가할 시군명 : "))
+                BIZPLC = str(input("추가할 약국이름 : "))
+                LOCPLC = str(input("추가할 지번주소 : "))
+                LOCPLCROAD = str(input("추가할 도로명주소 : "))
+                BSN = str(input("추가할 운영현황 : "))
+                LICENSG = str(input("추가할 인허가구 : "))
+                data.deletep()
+                data.plusdata(Name, SIGUN, BIZPLC, LOCPLC, LOCPLCROAD, BSN, LICENSG)
+                print('\n')
+                print("1. 추가데이터 출력하기"'\n')
+                print("2. 추가데이터 전송하기"'\n')
+                while(pls_menu < 1 or pls_menu > 2):
+                    pls_menu = int(input("번호를 입력하세요 : "))
+                if pls_menu == data.PDTOINFO:
+                    data.plusdataInfo(Name, SIGUN, BIZPLC, LOCPLC, LOCPLCROAD, BSN, LICENSG)
+                elif pls_menu == data.PDTOEM:
+                    user_id = str(input("이메일입력 : "))
+                    send_mail("kjk3510@gmail.com", user_id, Name + " 약국정보 + 데이터추가", "test to email", "save2.txt")
+
+
 
 
 #        elif menu == data.SAVE:
