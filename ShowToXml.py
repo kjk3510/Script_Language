@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-from ParseToXml import Data
-from sendtomail import send_mail
+from ParseToXml import Data # 파싱데이터를 받아오기위함
+from sendtomail import send_mail # 이메일보내기 위함
 
 
 def main():
@@ -27,7 +27,7 @@ def main():
             menu = int(input("번호를 입력하세요 : "))
             print('\n\n')
 
-        if menu == data.SEARCH:
+        if menu == data.SEARCH: # 파싱데이터 출력하기
             data.sigunNm = str(input("시군명을 입력하세요 : "))
             Name = data.sigunNm
             data.parse(Name)
@@ -48,7 +48,7 @@ def main():
                 user_id = str(input("이메일입력 : "))
                 send_mail("kjk3510@gmail.com", user_id, Name + " 약국정보", "test to email", "save.txt")
 
-        elif menu == data.SAVE:
+        elif menu == data.SAVE: # 파싱데이터 저장하기
             data.sigunNm = str(input("시군명을 입력하세요 : "))
             Name = data.sigunNm
             data.parse(Name)
@@ -61,7 +61,7 @@ def main():
                 user_id = str(input("이메일입력 : "))
                 send_mail("kjk3510@gmail.com", user_id, Name + " 약국정보", "test to email", "save.txt")
 
-        elif menu == data.EMAIL:
+        elif menu == data.EMAIL: # 파싱데이터 이메일보내기
             data.sigunNm = str(input("시군명을 입력하세요 : "))
             Name = data.sigunNm
             data.parse(Name)
@@ -76,7 +76,7 @@ def main():
             if em_menu == data.EMTOSCH:
                 data.printInfo(Name)
 
-        elif menu == data.PLUSDATA:
+        elif menu == data.PLUSDATA: # 파싱데이터에 추가하기
             data.plusdata()
 
 #        elif menu == data.SAVE:

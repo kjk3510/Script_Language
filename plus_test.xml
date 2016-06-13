@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+ <Parmacy>
+             <head>
+                           <list_total_count>106</list_total_count>
+                           <RESULT>
+                                          <CODE>INFO-000</CODE>
+                                          <MESSAGE>정상 처리되었습니다.</MESSAGE>
+
+                           </RESULT>
+
+             </head>
+             <row>
+                           <SIGUN_CD>41410</SIGUN_CD>
+                           <SIGUN_NM>군포시</SIGUN_NM>
+                           <BIZPLC_NM>한림약국</BIZPLC_NM>
+                           <LOCPLC_LOTNO_ADDR>경기도 군포시 당동 745-5 한림오피스텔 101호</LOCPLC_LOTNO_ADDR>
+                           <LOCPLC_ROADNM_ADDR>경기도 군포시 군포로 545, 101호 (당동, 한림오피스텔 )</LOCPLC_ROADNM_ADDR>
+                           <LICENSG_DE>20031215</LICENSG_DE>
+                           <BSN_STATE_NM>운영중</BSN_STATE_NM>
+                           <CLSBIZ_DE/>
+                           <SUSPNBIZ_BEGIN_DE/>
+                           <SUSPNBIZ_END_DE/>
+                           <REOPENBIZ_DE/>
+                           <LOCPLC_AR/>
+                           <LOCPLC_ZIP_CD>435010</LOCPLC_ZIP_CD>
+                           <PARMACY_BSN_AR>26.65</PARMACY_BSN_AR>
+                           <LICENSG_DIV_NM>약국</LICENSG_DIV_NM>
+                           <APPONT_DE>20031215</APPONT_DE>
+                           <WGS84_LOGT>126.94633650362464</WGS84_LOGT>
+                           <WGS84_LAT>37.35467065621368</WGS84_LAT>
+             </row>

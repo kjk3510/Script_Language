@@ -35,3 +35,18 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+
+SEARCH = 1
+    SCHTOSAVE = 1
+    SCHTOEM = 2
+    
+SAVE = 2
+    SVTOEM = 1
+    
+EMAIL = 3
+    EMTOSCH = 1
+    
+PLUSDATA = 4
+    PDTOSAVE = 1
+    PDTOEM = 2

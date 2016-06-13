@@ -29,7 +29,7 @@ class Data:
 
     Test_Name = None
 
-    def __init__(self):
+    def __init__(self): #
         self.key = '47a1ee741e9545b1a868605931cbdd61'
         self.url = None
         self.sigunNm = None
@@ -37,7 +37,7 @@ class Data:
         self.tree = None
         self.root = None
 
-    def parse(self, Name):
+    def parse(self, Name): # 오픈api를 파싱하기위한 함수
         self.url = "http://openapi.gg.go.kr/Parmacy?KEY=%s&pSize=1000&SIGUN_NM=" % self.key + quote('%s' % self.sigunNm)
         data = urllib.request.urlopen(self.url).read()
         self.filename = "pharmacy" + ".xml"
@@ -48,7 +48,7 @@ class Data:
         self.root = self.tree.getroot()
 
 
-    def printInfo(self, Name):
+    def printInfo(self, Name): # 파싱데이터 출력을 위한 함수
         for Parmacy in self.root.iter("Parmacy"):
             for row in Parmacy.iter("row"):
                 print('--------------------------------------------------------------')
@@ -65,7 +65,7 @@ class Data:
                 print('검색개수 : ' + head.findtext('list_total_count'))
 
 
-    def save(self, Name):
+    def save(self, Name): # 파싱데이터 저장을 위한 함수
         for Parmacy in self.root.iter("Parmacy"):
             for row in Parmacy.iter("row"):
                 self.savename = "save.txt"
@@ -91,7 +91,9 @@ class Data:
         print("데이터가 저장되었습니다."'\n')
 
     def plusdata(self):
-        print("데이터 추가하기")
+        print("데이터 추가하기"'\n')
+        pf = open("pharmacy.xml", "a")
+
 
     def delete(self):
         files = glob.glob("*")
