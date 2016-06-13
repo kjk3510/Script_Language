@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+
+
+from ParseToXml import Data
+from sendtomail import send_mail
+
+
+def main():
+    data = Data()
+    sigunNm = None
+
+    while(1):
+        print("시군을 입력하세요"'\n')
+
+        if sigunNm == None:
+            data.sigunNm = str(input("시군명 : "))
+            Name = data.sigunNm
+            print('\n\n')
+
+        data.parse(Name)
+        data.printInfo(Name)
+        data.save(Name)
+        send_mail("kjk3510@gmail.com", "kjk3510@naver.com", "test", "test to email", "save.txt")
+        print("\n")
+
+
+if __name__ == "__main__":
+    main()
+
