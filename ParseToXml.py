@@ -11,7 +11,6 @@ import os
 import glob
 
 
-
 class Data:
     SEARCH = 1
     SCHTOSAVE = 1
@@ -29,6 +28,7 @@ class Data:
 
     Test_Name = None
 
+
     def __init__(self): #
         self.key = '47a1ee741e9545b1a868605931cbdd61'
         self.url = None
@@ -36,6 +36,7 @@ class Data:
         self.filename = None
         self.tree = None
         self.root = None
+
 
     def parse(self, Name): # 오픈api를 파싱하기위한 함수
         self.url = "http://openapi.gg.go.kr/Parmacy?KEY=%s&pSize=1000&SIGUN_NM=" % self.key + quote('%s' % self.sigunNm)
@@ -88,7 +89,8 @@ class Data:
             for head in Parmacy.iter("head"):
                 fts.write('검색개수 : ' + head.findtext('list_total_count'))
                 fts.close()
-        print("데이터가 저장되었습니다."'\n')
+        print("데이터가 저장되었습니다.")
+
 
     def plusdata(self):
         print("데이터 추가하기"'\n')

@@ -3,6 +3,7 @@
 
 from ParseToXml import Data # 파싱데이터를 받아오기위함
 from sendtomail import send_mail # 이메일보내기 위함
+from plus_data_example import plusplus # 파싱데이터에 추가입력 하기위함
 
 
 def main():
@@ -71,13 +72,20 @@ def main():
             user_id = str(input("이메일입력 : "))
             send_mail("kjk3510@gmail.com", user_id, Name + " 약국정보", "test to email", "save.txt")
             print('\n')
-            print("출력하기 원하면 1번을 입력하세요 : "'\n')
+            print("출력하기 원하면 1번을 입력하세요"'\n')
             em_menu = int(input("번호 입력 : "))
             if em_menu == data.EMTOSCH:
                 data.printInfo(Name)
 
-        elif menu == data.PLUSDATA: # 파싱데이터에 추가하기
-            data.plusdata()
+        elif menu == data.PLUSDATA: # 파싱데이터에 추가하기 ------ 수정필요 예제로 연습중
+            data.sigunNm = str(input("시군명을 입력하세요 : "))
+            Name = data.sigunNm
+            data.parse(Name)
+            pl_menu = int(input("번호 입력 : "))
+            if pl_menu == data.PDTOSAVE:
+                plusplus()
+                data.printInfo(Name)
+
 
 #        elif menu == data.SAVE:
 
