@@ -14,7 +14,7 @@ def search(query, **args):
     })
 
     #호출할 url을 만든다
-    url = SEARCH_BASE + 'http://localhost' + urllib.parse.urlencode(args)
+    url = SEARCH_BASE + '?' + urllib.parse.urlencode(args)
 
     #json으로 응답을 받는다.
     result = simplejson.load(urllib.request.urlopen(url))

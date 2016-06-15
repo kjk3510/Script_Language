@@ -30,7 +30,7 @@ class Data:
     Test_Name = None
 
 
-    def __init__(self): #
+    def __init__(self): # 파싱 등에 필요한 초기화 함수
         self.key = '47a1ee741e9545b1a868605931cbdd61'
         self.url = None
         self.sigunNm = None
@@ -92,7 +92,7 @@ class Data:
                 fts.close()
         print("데이터가 저장되었습니다.")
 
-
+# 기존 데이터에 입려값 받아서 데이터 추가하기
     def plusdata(self, Name, SIGUN, BIZPLC, LOCPLC, LOCPLCROAD, BSN, LICENSG):
         for Parmacy in self.root.iter("Parmacy"):
             for row in Parmacy.iter("row"):
@@ -132,7 +132,7 @@ class Data:
         fts.write('\n')
         fts.close()
 
-
+# 추가한 데이터값 출력하기
     def plusdataInfo(self, Name, SIGUN, BIZPLC, LOCPLC, LOCPLCROAD, BSN, LICENSG):
         fp = open("save2.txt", "r")
 #        while True:
@@ -143,14 +143,14 @@ class Data:
         print(rfp)
         fp.close()
 
-
+# 기존에 파일이 있으면 삭제하기
     def delete(self):
         files = glob.glob("*")
         for f in files:
             if f == 'save.txt':
                 os.remove(f)
 
-
+# 기존에 파일이 있으면 삭제하기 2
     def deletep(self):
         files = glob.glob("*")
         for f in files:

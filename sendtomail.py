@@ -9,12 +9,15 @@ from email import utils
 from email.header import Header
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
-from email.mime.image import MIMEImage
+
+# 메일 보내기위한 기본 정보를 입력
 
 smtp_server  = "smtp.gmail.com"
 port ='587'
 userid = "kjk3510@gmail.com"
 passwd = "dowkqh1313!"
+
+# 메일을 보내기위한 함수 작성
 
 def send_mail(from_user, to_user, subject, text, attach):
         COMMASPACE = ", "

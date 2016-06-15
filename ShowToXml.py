@@ -9,6 +9,7 @@ def main():
     data = Data()
 
     while(1):
+# 메뉴 초기화한 부분들
         menu = 0
         sc_menu = 0
         sv_menu = 0
@@ -29,7 +30,6 @@ def main():
         print("2. 저장하기"'\n')
         print("3. 메일보내기"'\n')
         print("4. 정보추가하기"'\n')
-        print("5. 지도띄우기"'\n')
 
         while(menu < 1 or menu > 4):
             menu = int(input("번호를 입력하세요 : "))
@@ -56,7 +56,7 @@ def main():
                 user_id = str(input("이메일입력 : "))
                 send_mail("kjk3510@gmail.com", user_id, Name + " 약국정보", "test to email", "save.txt")
 
-        elif menu == data.SAVE: # 파싱데이터 저장하기
+        elif menu == data.SAVE: # 파싱데이터 저장하기 (.txt 형태로)
             data.sigunNm = str(input("시군명을 입력하세요 : "))
             Name = data.sigunNm
             data.parse(Name)
@@ -84,7 +84,7 @@ def main():
             if em_menu == data.EMTOSCH:
                 data.printInfo(Name)
 
-        elif menu == data.PLUSDATA: # 파싱데이터에 추가하기 ------ 수정필요 예제로 연습중
+        elif menu == data.PLUSDATA: # 파싱데이터 불러와서 추가정보 입력하기
             data.sigunNm = str(input("시군명을 입력하세요 : "))
             Name = data.sigunNm
             data.parse(Name)
