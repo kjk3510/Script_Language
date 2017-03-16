@@ -4,9 +4,9 @@
 import urllib.request
 from urllib.parse import quote
 import xml.etree.ElementTree as ET
-import requests as rq
-import smtplib
-from email.mime.text import MIMEText
+#import requests as rq
+#import smtplib
+#from email.mime.text import MIMEText
 import os
 import glob
 
